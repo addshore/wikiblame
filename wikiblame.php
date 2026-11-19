@@ -235,7 +235,7 @@ header('X-Accel-Buffering: no');
 		//$needle = needle_regex($needle); necessary if you work with html, which is currently not the case
 		check_options(); // stops script, when wrong options are used
 		check_revision_date_format($messages);
-		if (!$use_binary_search && ($_REQUEST['user'] ?? '') == "") {
+		if (!$use_binary_search && ($_REQUEST['user'] ?? '') === "") {
 			check_calls_from_this_ip($limit, $ignorefirst, $skipversions);
 		}
 
@@ -266,7 +266,7 @@ header('X-Accel-Buffering: no');
 		$needle = trim($_REQUEST['needle'] ?? '');
 
 		$lang = correct_language_mistakes($_REQUEST['lang'] ?? '');
-		if ($lang == "") {
+		if ($lang === "") {
 			if ($user_lang == "zh-hans" || $user_lang == "zh-hant") {
 				$lang = "zh";
 			} else {
@@ -275,12 +275,12 @@ header('X-Accel-Buffering: no');
 		}
 
 		$project = $_REQUEST['project'] ?? '';
-		if ($project == "") {
+		if ($project === "") {
 			$project = "wikipedia";
 		}
 
 		$tld = $_REQUEST['tld'] ?? '';
-		if ($tld == "") {
+		if ($tld === "") {
 			$tld = "org";
 		}
 		if ($lang == "blank") {
@@ -290,7 +290,7 @@ header('X-Accel-Buffering: no');
 		}
 
 		$use_binary_search = true;
-		if (($_REQUEST['searchmethod'] ?? '') == "lin") {
+		if (($_REQUEST['searchmethod'] ?? '') === "lin") {
 			$use_binary_search = false;
 		}
 
@@ -315,7 +315,7 @@ header('X-Accel-Buffering: no');
 		}
 
 		$ignore_minors = $_REQUEST['ignore_minors'] ?? '';
-		if ($ignore_minors == "on") {
+		if ($ignore_minors === "on") {
 			$ignore_minors = true;
 		} else {
 			$ignore_minors = false;
@@ -344,14 +344,14 @@ header('X-Accel-Buffering: no');
 			$offset = strftime("%Y%m%d%H%M%S");
 		}
 
-		if (($_REQUEST['binary_search_inverse'] ?? '') == "on") {
+		if (($_REQUEST['binary_search_inverse'] ?? '') === "on") {
 			$binary_search_inverse = true;
 		} else {
 			$binary_search_inverse = false;
 		}
 
 		$asc = false;
-		if (($_REQUEST['order'] ?? '') == "asc") {
+		if (($_REQUEST['order'] ?? '') === "asc") {
 			if (!$use_binary_search) {
 				$asc = true;
 			}
@@ -360,7 +360,7 @@ header('X-Accel-Buffering: no');
 		$user = $_REQUEST['user'] ?? '';
 
 		$force_wikitags = $_REQUEST['force_wikitags'] ?? '';
-		if ($force_wikitags == "on") {
+		if ($force_wikitags === "on") {
 			$tags_present = true;
 		} else {
 			$force_wikitags = "off";
