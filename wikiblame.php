@@ -518,6 +518,7 @@ header('X-Accel-Buffering: no');
 			'%B' => $month_localized,
 			'%d' => date('d', $timestamp),
 			'%e' => str_pad(date('j', $timestamp), 2, ' ', STR_PAD_LEFT),
+			'%m' => date('m', $timestamp),
 			'%Y' => date('Y', $timestamp),
 			'%H' => date('H', $timestamp),
 			'%k' => str_pad(date('G', $timestamp), 2, ' ', STR_PAD_LEFT),
