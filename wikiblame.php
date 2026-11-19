@@ -27,6 +27,11 @@ header('X-Accel-Buffering: no');
 </head><?php
 		include("shared_inc/language.inc.php");
 		include("shared_inc/wiki_functions.inc.php");
+
+		class PageNotFoundException extends RuntimeException
+		{
+		}
+
 		prevent_automatic_escaping_of_input_strings();
 		$inc_dir = "wikiblame_inc";
 
@@ -255,7 +260,7 @@ header('X-Accel-Buffering: no');
 			$exec_time = do_search();
 			echo '<br>' . $exec_time;
 			echo '<br><br><small>' . get_url($_REQUEST['offjahr'], $_REQUEST['offmon'], $_REQUEST['offtag']) . '</small>';
-		} catch (RuntimeException $e) {
+		} catch (PageNotFoundException $e) {
 			echo '<div class="inputerror" data-fieldid="article">' . htmlspecialchars($e->getMessage()) . '</div>';
 			echo '<br>' . str_replace('_EXECUTIONTIME_', time() - $search_beginning, $messages['execution_time']);
 		}
@@ -425,7 +430,7 @@ header('X-Accel-Buffering: no');
 		$historyurl = "https://" . $server . "/wiki/" . $articleenc . "?action=history&limit=$limit&offset=$offset&uselang=en";	//$user_lang"
 		$history = curl_request($historyurl, null, $httpcode);
 		if ($httpcode == 404) {
-			throw new RuntimeException($messages['page_not_found']);
+			throw new PageNotFoundException($messages['page_not_found']);
 		}
 		//echo "<hr><pre>$history</pre><hr>";
 		return listversions($history);
